@@ -1,0 +1,35 @@
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  constitution-compliance:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v5
+      - run: uv sync --all-extras --frozen
+      - name: Fixture determinism (Mock Data rule)
+        run: uv run python fixtures/generate.py --check
+      - name: No provenance branching (Principle V, FR-026)
+        run: make provenance
+      - name: No secrets in source
+        run: |
+          if grep -rnIE '(secret|token|password)[[:space:]]*=[[:space:]]*["'"'"'][^"'"'"']{8,}' src/ fixtures/; then
+            echo "potential secret committed"; exit 1
+          fi
+      - name: Lint and types
+        run: make lint
+      - name: Tests
+        run: uv run pytest -q
+      - name: Coverage gate (risk engine, evidence, validator)
+        run: make coverage
+      - name: Scenario scorecard (SC-003)
+        run: uv run python eval/run_eval.py
+      - name: Performance budgets (SC-001)
+        run: uv run python eval/perf.py
+      - name: Compliance summary
+        run: echo "Constitution v1.0.0 compliance gate: PASS"

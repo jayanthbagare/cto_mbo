@@ -1,0 +1,11 @@
+{
+  "scenario": "status-inconsistency",
+  "salesOrders": {
+    "0000012355": {
+      "atRisk": true,
+      "categories": [
+        "STATUS_INCONSISTENCY"
+      ]
+    }
+  }
+}

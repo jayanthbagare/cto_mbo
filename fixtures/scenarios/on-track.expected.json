@@ -1,0 +1,9 @@
+{
+  "scenario": "on-track",
+  "salesOrders": {
+    "0000012345": {
+      "atRisk": false,
+      "categories": []
+    }
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "scenario": "material-shortage",
+  "salesOrders": {
+    "0000012353": {
+      "atRisk": true,
+      "categories": [
+        "MATERIAL_SHORTAGE"
+      ]
+    }
+  }
+}

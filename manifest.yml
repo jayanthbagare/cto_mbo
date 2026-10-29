@@ -1,0 +1,19 @@
+---
+applications:
+  - name: cto-order-agent
+    memory: 1024M
+    disk_quota: 512M
+    instances: 1
+    buildpacks:
+      - python_buildpack
+    health-check-type: http
+    health-check-http-endpoint: /healthz
+    command: python -m cto_order_agent.main
+    env:
+      DATA_SOURCE: mock
+      LLM_MODE: recorded
+      PORT: 8080
+      PROCESS_CLOCK: "2026-01-15T08:00:00Z"
+    services:
+      - cto-order-agent-destination
+      - cto-order-agent-ai-core

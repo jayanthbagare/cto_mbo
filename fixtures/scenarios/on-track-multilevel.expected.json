@@ -1,0 +1,9 @@
+{
+  "scenario": "on-track-multilevel",
+  "salesOrders": {
+    "0000012347": {
+      "atRisk": false,
+      "categories": []
+    }
+  }
+}

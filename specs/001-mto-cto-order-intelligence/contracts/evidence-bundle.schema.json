@@ -1,0 +1,168 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.com/cto-mbo/contracts/evidence-bundle.schema.json",
+  "title": "EvidenceBundle",
+  "description": "The immutable, deterministic input to the narrative layer. The model may only describe what is in this document. The grounding validator rejects any response containing a number, date, quantity, or status not present in allowedTokens.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "bundleId",
+    "taskId",
+    "contextId",
+    "mode",
+    "facts",
+    "inferences",
+    "recommendations",
+    "asOf",
+    "dataCompleteness",
+    "allowedTokens"
+  ],
+  "properties": {
+    "bundleId": { "type": "string", "format": "uuid" },
+    "taskId": { "type": "string", "minLength": 1 },
+    "contextId": { "type": "string", "minLength": 1 },
+    "mode": {
+      "enum": ["PLANNER_VIEW", "RISK_EXPLANATION", "CUSTOMER_SUMMARY", "PORTFOLIO"]
+    },
+    "asOf": { "type": "string", "format": "date-time" },
+    "dataCompleteness": { "enum": ["COMPLETE", "PARTIAL", "INSUFFICIENT"] },
+    "missingEvidence": {
+      "type": "array",
+      "items": { "type": "string", "maxLength": 200 },
+      "description": "Required and non-empty when dataCompleteness is PARTIAL or INSUFFICIENT (FR-017)."
+    },
+    "allowedTokens": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 1 },
+      "uniqueItems": true,
+      "description": "Exhaustive whitelist of numeric and date literals the narrative may contain, derived only from facts and recommendations."
+    },
+    "facts": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/fact" }
+    },
+    "inferences": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/inference" }
+    },
+    "recommendations": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/recommendation" }
+    },
+    "sourcesConsulted": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Tool names actually called for this answer (FR-010)."
+    },
+    "sourcesUnavailable": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Tool names that failed or were skipped; must be reflected in dataCompleteness."
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": { "dataCompleteness": { "enum": ["PARTIAL", "INSUFFICIENT"] } },
+        "required": ["dataCompleteness"]
+      },
+      "then": {
+        "required": ["missingEvidence"],
+        "properties": { "missingEvidence": { "minItems": 1 } },
+        "description": "An incomplete assessment must name its gaps (FR-017)."
+      }
+    },
+    {
+      "if": {
+        "properties": { "dataCompleteness": { "const": "COMPLETE" } },
+        "required": ["dataCompleteness"]
+      },
+      "then": { "properties": { "sourcesUnavailable": { "maxItems": 0 } } }
+    }
+  ],
+  "$defs": {
+    "fact": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "factId",
+        "statement",
+        "sourceSystem",
+        "sourceEntity",
+        "sourceKey",
+        "sourceField",
+        "value",
+        "asOf"
+      ],
+      "properties": {
+        "factId": { "type": "string", "pattern": "^F-[0-9]+$" },
+        "statement": {
+          "type": "string",
+          "maxLength": 500,
+          "description": "Templated from the record; never model-authored."
+        },
+        "sourceSystem": { "enum": ["SAP_S4HANA"] },
+        "sourceEntity": {
+          "enum": [
+            "SalesOrder",
+            "SalesOrderItem",
+            "ProductionOrder",
+            "ProductionOperation",
+            "ProductionConfirmation",
+            "Material",
+            "MaterialAvailability",
+            "Customer"
+          ]
+        },
+        "sourceKey": { "type": "string", "minLength": 1, "maxLength": 40 },
+        "sourceField": { "type": "string", "minLength": 1, "maxLength": 60 },
+        "value": { "type": "string", "minLength": 1, "maxLength": 200 },
+        "asOf": { "type": "string", "format": "date-time" }
+      }
+    },
+    "inference": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["inferenceId", "statement", "basedOn", "confidence"],
+      "properties": {
+        "inferenceId": { "type": "string", "pattern": "^I-[0-9]+$" },
+        "statement": { "type": "string", "maxLength": 500 },
+        "basedOn": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "type": "string", "pattern": "^F-[0-9]+$" },
+          "description": "Fact IDs supporting the inference. An inference with no fact has no basis and must not exist."
+        },
+        "confidence": { "enum": ["HIGH", "MEDIUM", "LOW"] }
+      }
+    },
+    "recommendation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "recommendationId",
+        "addresses",
+        "action",
+        "ownerRole",
+        "urgency",
+        "resolutionEvidence"
+      ],
+      "properties": {
+        "recommendationId": { "type": "string", "pattern": "^R-[0-9]+$" },
+        "addresses": { "type": "string", "minLength": 1, "description": "Exception ID." },
+        "action": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 300,
+          "description": "Rendered from a closed template set; the model must not invent actions."
+        },
+        "ownerRole": {
+          "enum": ["PRODUCTION_PLANNER", "SHOP_FLOOR_SUPERVISOR", "PROCUREMENT", "FULFILLMENT"]
+        },
+        "urgency": { "enum": ["CRITICAL", "HIGH", "MEDIUM", "LOW"] },
+        "resolutionEvidence": { "type": "string", "minLength": 1, "maxLength": 200 }
+      }
+    }
+  }
+}

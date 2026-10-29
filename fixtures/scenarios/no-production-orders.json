@@ -1,0 +1,145 @@
+{
+  "_meta": {
+    "synthetic": true,
+    "notice": "SYNTHETIC DATA - no production, customer, or personal data",
+    "schemaVersion": "1.0.0",
+    "seed": 42,
+    "generatedBy": "fixtures/generate.py",
+    "scenario": "no-production-orders"
+  },
+  "salesOrders": [
+    {
+      "sales_order": "0000012350",
+      "sales_order_type": "ZMTO",
+      "customer_id": "0000100001",
+      "customer_name": "ACME Example GmbH",
+      "purchase_order_ref": "PO-2350",
+      "requested_delivery_date": "2026-01-28",
+      "overall_status": "IN_PROCESS",
+      "sales_organization": "1000",
+      "currency": "EUR",
+      "total_net_amount": "50000.00",
+      "created_at": "2025-12-01T08:00:00Z",
+      "items": [
+        {
+          "sales_order": "0000012350",
+          "item_number": "000010",
+          "material": "MTO-2000-A",
+          "requested_quantity": "3",
+          "quantity_unit": "EA",
+          "plant": "1010",
+          "item_status": "OPEN",
+          "confirmed_delivery_date": null
+        }
+      ]
+    }
+  ],
+  "productionOrders": [],
+  "operations": [],
+  "confirmations": [],
+  "materials": [
+    {
+      "material": "MTO-1000-A",
+      "description": "Frame Assembly A",
+      "material_type": "FERT",
+      "base_unit": "EA",
+      "product_group": "MTO",
+      "is_batch_managed": false
+    },
+    {
+      "material": "MTO-1000-B",
+      "description": "Hydraulic Kit B",
+      "material_type": "HALB",
+      "base_unit": "EA",
+      "product_group": "MTO",
+      "is_batch_managed": false
+    },
+    {
+      "material": "MTO-1000-C",
+      "description": "Steel Plate C",
+      "material_type": "ROH",
+      "base_unit": "KG",
+      "product_group": "MTO",
+      "is_batch_managed": false
+    },
+    {
+      "material": "MTO-2000-A",
+      "description": "Pump Unit",
+      "material_type": "FERT",
+      "base_unit": "EA",
+      "product_group": "MTO",
+      "is_batch_managed": false
+    },
+    {
+      "material": "MTO-3000-A",
+      "description": "Control Cabinet",
+      "material_type": "FERT",
+      "base_unit": "EA",
+      "product_group": "MTO",
+      "is_batch_managed": false
+    },
+    {
+      "material": "MTO-4000-A",
+      "description": "Gearbox Housing",
+      "material_type": "FERT",
+      "base_unit": "EA",
+      "product_group": "MTO",
+      "is_batch_managed": false
+    },
+    {
+      "material": "MTO-5000-A",
+      "description": "Sensor Module",
+      "material_type": "HALB",
+      "base_unit": "EA",
+      "product_group": "MTO",
+      "is_batch_managed": false
+    },
+    {
+      "material": "MTO-7000-A",
+      "description": "Gap Test Part",
+      "material_type": "ROH",
+      "base_unit": "EA",
+      "product_group": "MTO",
+      "is_batch_managed": false
+    },
+    {
+      "material": "MTO-9000-A",
+      "description": "Short Supply Part",
+      "material_type": "ROH",
+      "base_unit": "EA",
+      "product_group": "MTO",
+      "is_batch_managed": false
+    }
+  ],
+  "availability": [
+    {
+      "material": "MTO-2000-A",
+      "plant": "1010",
+      "storage_location": "0001",
+      "unrestricted_quantity": "1000",
+      "unit": "EA",
+      "stock_type": "UNRESTRICTED",
+      "as_of": "2026-01-15T08:00:00Z"
+    }
+  ],
+  "customers": [
+    {
+      "customer_id": "0000100001",
+      "name": "ACME Example GmbH",
+      "country": "DEU",
+      "is_internal": false
+    },
+    {
+      "customer_id": "0000100002",
+      "name": "Northwind Example Ltd",
+      "country": "GBR",
+      "is_internal": false
+    },
+    {
+      "customer_id": "0000100003",
+      "name": "Globex Example AG",
+      "country": "DEU",
+      "is_internal": false
+    }
+  ]
+}

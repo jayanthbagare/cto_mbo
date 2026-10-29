@@ -1,0 +1,9 @@
+{
+  "scenario": "partially-confirmed-on-time",
+  "salesOrders": {
+    "0000012348": {
+      "atRisk": false,
+      "categories": []
+    }
+  }
+}

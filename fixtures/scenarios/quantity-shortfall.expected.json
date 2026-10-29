@@ -1,0 +1,11 @@
+{
+  "scenario": "quantity-shortfall",
+  "salesOrders": {
+    "0000012354": {
+      "atRisk": true,
+      "categories": [
+        "QUANTITY_SHORTFALL"
+      ]
+    }
+  }
+}

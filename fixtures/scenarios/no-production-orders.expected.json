@@ -1,0 +1,9 @@
+{
+  "scenario": "no-production-orders",
+  "salesOrders": {
+    "0000012350": {
+      "atRisk": false,
+      "categories": []
+    }
+  }
+}

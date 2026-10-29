@@ -1,0 +1,12 @@
+{
+  "scenario": "data-gap",
+  "salesOrders": {
+    "0000012352": {
+      "atRisk": true,
+      "categories": [
+        "MISSING_CONFIRMATION"
+      ],
+      "dataCompleteness": "INSUFFICIENT"
+    }
+  }
+}

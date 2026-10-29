@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: cto-order-agent-config
+data:
+  DATA_SOURCE: "mock"
+  LLM_MODE: "recorded"
+  PORT: "8080"
+  PROCESS_CLOCK: "2026-01-15T08:00:00Z"
+  FIXTURES_DIR: "fixtures/scenarios"
+  PORTFOLIO_WINDOW_DAYS: "365"

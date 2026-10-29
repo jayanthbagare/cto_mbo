@@ -1,0 +1,11 @@
+{
+  "scenario": "schedule-slip",
+  "salesOrders": {
+    "0000012346": {
+      "atRisk": true,
+      "categories": [
+        "SCHEDULE_SLIP"
+      ]
+    }
+  }
+}

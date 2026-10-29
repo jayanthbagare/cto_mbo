@@ -1,0 +1,188 @@
+{
+  "_meta": {
+    "synthetic": true,
+    "notice": "SYNTHETIC DATA - no production, customer, or personal data",
+    "schemaVersion": "1.0.0",
+    "seed": 42,
+    "generatedBy": "fixtures/generate.py",
+    "scenario": "status-inconsistency"
+  },
+  "salesOrders": [
+    {
+      "sales_order": "0000012355",
+      "sales_order_type": "ZMTO",
+      "customer_id": "0000100003",
+      "customer_name": "Globex Example AG",
+      "purchase_order_ref": "PO-2355",
+      "requested_delivery_date": "2026-01-22",
+      "overall_status": "IN_PROCESS",
+      "sales_organization": "1000",
+      "currency": "EUR",
+      "total_net_amount": "50000.00",
+      "created_at": "2025-12-01T08:00:00Z",
+      "items": [
+        {
+          "sales_order": "0000012355",
+          "item_number": "000010",
+          "material": "MTO-1000-A",
+          "requested_quantity": "10",
+          "quantity_unit": "EA",
+          "plant": "1010",
+          "item_status": "OPEN",
+          "confirmed_delivery_date": null
+        }
+      ]
+    }
+  ],
+  "productionOrders": [
+    {
+      "production_order": "1000080",
+      "production_order_type": "ZP01",
+      "sales_order": "0000012355",
+      "sales_order_item": "000010",
+      "parent_production_order": null,
+      "material": "MTO-1000-A",
+      "plant": "1010",
+      "total_quantity": "10",
+      "quantity_unit": "EA",
+      "status": "RELEASED",
+      "planned_start": "2026-01-14T08:00:00Z",
+      "planned_end": "2026-01-18T08:00:00Z",
+      "confirmed_end": "2026-01-18T08:00:00Z",
+      "actual_end": null,
+      "confirmed_quantity": "10",
+      "hierarchy_level": 0
+    }
+  ],
+  "operations": [
+    {
+      "production_order": "1000080",
+      "operation": "0010",
+      "description": "Assembly step",
+      "work_center": "WC-01",
+      "planned_start": "2026-01-14T08:00:00Z",
+      "planned_end": "2026-01-18T08:00:00Z",
+      "confirmed_quantity": "10",
+      "is_released": true
+    }
+  ],
+  "confirmations": [
+    {
+      "confirmation_group": "CG-80",
+      "confirmation_count": "1",
+      "production_order": "1000080",
+      "operation": "0010",
+      "confirmed_quantity": "10",
+      "quantity_unit": "EA",
+      "yield_quantity": "10",
+      "scrap_quantity": "0",
+      "posting_date": "2026-01-18",
+      "is_reversed": false
+    }
+  ],
+  "materials": [
+    {
+      "material": "MTO-1000-A",
+      "description": "Frame Assembly A",
+      "material_type": "FERT",
+      "base_unit": "EA",
+      "product_group": "MTO",
+      "is_batch_managed": false
+    },
+    {
+      "material": "MTO-1000-B",
+      "description": "Hydraulic Kit B",
+      "material_type": "HALB",
+      "base_unit": "EA",
+      "product_group": "MTO",
+      "is_batch_managed": false
+    },
+    {
+      "material": "MTO-1000-C",
+      "description": "Steel Plate C",
+      "material_type": "ROH",
+      "base_unit": "KG",
+      "product_group": "MTO",
+      "is_batch_managed": false
+    },
+    {
+      "material": "MTO-2000-A",
+      "description": "Pump Unit",
+      "material_type": "FERT",
+      "base_unit": "EA",
+      "product_group": "MTO",
+      "is_batch_managed": false
+    },
+    {
+      "material": "MTO-3000-A",
+      "description": "Control Cabinet",
+      "material_type": "FERT",
+      "base_unit": "EA",
+      "product_group": "MTO",
+      "is_batch_managed": false
+    },
+    {
+      "material": "MTO-4000-A",
+      "description": "Gearbox Housing",
+      "material_type": "FERT",
+      "base_unit": "EA",
+      "product_group": "MTO",
+      "is_batch_managed": false
+    },
+    {
+      "material": "MTO-5000-A",
+      "description": "Sensor Module",
+      "material_type": "HALB",
+      "base_unit": "EA",
+      "product_group": "MTO",
+      "is_batch_managed": false
+    },
+    {
+      "material": "MTO-7000-A",
+      "description": "Gap Test Part",
+      "material_type": "ROH",
+      "base_unit": "EA",
+      "product_group": "MTO",
+      "is_batch_managed": false
+    },
+    {
+      "material": "MTO-9000-A",
+      "description": "Short Supply Part",
+      "material_type": "ROH",
+      "base_unit": "EA",
+      "product_group": "MTO",
+      "is_batch_managed": false
+    }
+  ],
+  "availability": [
+    {
+      "material": "MTO-1000-A",
+      "plant": "1010",
+      "storage_location": "0001",
+      "unrestricted_quantity": "1000",
+      "unit": "EA",
+      "stock_type": "UNRESTRICTED",
+      "as_of": "2026-01-15T08:00:00Z"
+    }
+  ],
+  "customers": [
+    {
+      "customer_id": "0000100001",
+      "name": "ACME Example GmbH",
+      "country": "DEU",
+      "is_internal": false
+    },
+    {
+      "customer_id": "0000100002",
+      "name": "Northwind Example Ltd",
+      "country": "GBR",
+      "is_internal": false
+    },
+    {
+      "customer_id": "0000100003",
+      "name": "Globex Example AG",
+      "country": "DEU",
+      "is_internal": false
+    }
+  ]
+}

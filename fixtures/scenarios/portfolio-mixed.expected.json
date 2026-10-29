@@ -1,0 +1,20 @@
+{
+  "scenario": "portfolio-mixed",
+  "salesOrders": {
+    "0000012356": {
+      "atRisk": true,
+      "categories": [
+        "SCHEDULE_SLIP",
+        "MISSING_CONFIRMATION"
+      ]
+    },
+    "0000012357": {
+      "atRisk": false,
+      "categories": []
+    },
+    "0000012358": {
+      "atRisk": false,
+      "categories": []
+    }
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "scenario": "already-delayed",
+  "salesOrders": {
+    "0000012349": {
+      "atRisk": true,
+      "categories": [
+        "SCHEDULE_SLIP",
+        "MISSING_CONFIRMATION"
+      ]
+    }
+  }
+}

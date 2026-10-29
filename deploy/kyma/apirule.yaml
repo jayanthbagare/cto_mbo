@@ -1,0 +1,21 @@
+apiVersion: gateway.kyma-project.io/v2
+kind: APIRule
+metadata:
+  name: cto-order-agent
+spec:
+  hosts:
+    - cto-order-agent
+  service:
+    name: cto-order-agent
+    port: 8080
+  gateway: kyma-system/kyma-gateway
+  rules:
+    - path: /a2a
+      methods: ["POST"]
+      noAuth: false
+    - path: /.well-known/agent-card.json
+      methods: ["GET"]
+      noAuth: false
+    - path: /healthz
+      methods: ["GET"]
+      noAuth: true

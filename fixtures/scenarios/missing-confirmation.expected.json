@@ -1,0 +1,11 @@
+{
+  "scenario": "missing-confirmation",
+  "salesOrders": {
+    "0000012351": {
+      "atRisk": true,
+      "categories": [
+        "MISSING_CONFIRMATION"
+      ]
+    }
+  }
+}
